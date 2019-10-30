@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+</head>
+<body>
+    <div id="app">
+        <message v-change-styles="{backgroundColor: 'gray', color: 'black'}"></message>
+        <computed-properties></computed-properties>
+        <methods></methods>
+        <vmodel></vmodel>
+        <vmodel-checkboxes></vmodel-checkboxes>
+        <emit @show-car-brand="showCarBrandFromEmitComponent"></emit>
+        <parent-data></parent-data>
+        <child-data ref="childData"></child-data>
+        <child-methods ref="childMethods"></child-methods>
+        <login-form></login-form>
+        <loops></loops>
+        <conditionals></conditionals>
+        <slots>
+            <template slot="header">
+                <h3>Layout header with slots</h3>
+            </template>
+            <p> Main without slot name </p>
+            <template slot="footer">
+                <h3>Layout footer with slots</h3>
+            </template>
+        </slots>
+        <watcher></watcher>
+        <computed-properties-get-set></computed-properties-get-set>
+        <load-dynamic-component></load-dynamic-component>
+        <mixins></mixins>
+        <props name="Juan" surname="Props" v-bind:age="25"></props>
+    </div>
+
+	<!-- At moment for this code, using Vue.js v2.6.10 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Directives -->
+    <script src="components/directives/focus.js"></script>
+    <script src="components/directives/change-styles.js"></script>
+
+    <!-- Filters -->
+    <script src="components/filters/currency-filter.js"></script>
+
+    <!-- Plugins -->
+    <script src="components/plugins/about-me.js"></script>
+
+    <!-- Components -->
+    <script src="components/message.js"></script>
+    <script src="components/computed-properties.js"></script>
+    <script src="components/methods.js"></script>
+    <script src="components/vmodel.js"></script>
+    <script src="components/vmodel-checkboxes.js"></script>
+    <script src="components/emit.js"></script>
+    <script src="components/parent-data.js"></script>
+    <script src="components/child-data.js"></script>
+    <script src="components/child-methods.js"></script>
+    <script src="components/login-form.js"></script>
+    <script src="components/loops.js"></script>
+    <script src="components/conditionals.js"></script>
+    <script src="components/slots.js"></script>
+    <script src="components/watcher.js"></script>
+    <script src="components/computed-properties-get-set.js"></script>
+    <script src="components/dynamic-components/component-one.js"></script>
+    <script src="components/dynamic-components/component-two.js"></script>
+    <script src="components/dynamic-components/component-three.js"></script>
+    <script src="components/load-dynamic-component.js"></script>
+    <script src="components/mixins.js"></script>
+    <script src="components/props.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                    appName: 'Getting started with Vuejs 2'
+                }
+            },
+            methods:{
+                showCarBrandFromEmitComponent(carBrand){
+                    alert(carBrand);
+                }
+            },
+            mounted (){
+                const componentName = this.$refs.childData.componentName;
+                console.log(componentName);
+
+                setTimeout(() =>{
+                    this.$refs.childMethods.showComponentName()
+                }, 1000);
+
+                // use plugin about me
+                console.log('Plugin Vue Prototype:', this.$me('Juan', 25));
+            }            
+        })
+    </script>
+    
+</body>
+</html>
